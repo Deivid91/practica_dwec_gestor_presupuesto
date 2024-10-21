@@ -2,8 +2,8 @@
 
 // Variable global
 let presupuesto = 0;
-let gastos = [];
-let idGasto = 0;
+let gastos = []; // Almacena listado de gastos
+let idGasto = 0; // Almacena id actual del gasto añadido
 
 
 function actualizarPresupuesto(nuevoPresupuesto) {
@@ -41,6 +41,27 @@ function CrearGasto(descripcion, valor) {
             console.log("Error: Introduzca un número no negativo.");
         };
     }
+}
+
+// Práctica Fundamentos de JavaScript II
+function listarGastos() {
+
+}
+
+function anyadirGasto() {
+
+}
+
+function borrarGasto() {
+
+}
+
+function calcularTotalGastos() {
+
+}
+
+function calcularBalance() {
+
 }
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
