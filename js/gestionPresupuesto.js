@@ -54,6 +54,14 @@ function calcularBalance() {
     return presupuesto - gastosTotales;
 }
 
+function filtrarGastos() {
+
+}
+
+function agruparGastos() {
+
+}
+
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
     this.descripcion = (typeof descripcion === 'string') ? descripcion : String(descripcion);
     this.valor = (typeof valor === 'number' && valor >= 0) ? valor : 0;
@@ -125,5 +133,7 @@ export   {
     anyadirGasto,
     borrarGasto,
     calcularTotalGastos,
-    calcularBalance
+    calcularBalance,
+    filtrarGastos,
+    agruparGastos
 }
