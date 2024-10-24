@@ -25,16 +25,28 @@ function listarGastos() {
    return gastos;
 }
 
-function anyadirGasto() {
+function anyadirGasto(gasto) {
+    gasto.id = idGasto; // Se crea la propiedad 'id' del objeto gasto y se le otorga el valor de idGasto
+    idGasto++;
+    gastos.push(gasto);
 
 }
 
-function borrarGasto() {
-
+function borrarGasto(idGasto) {
+    // Uso findIndex en vez de find, ya que necesitaré la posición del elemento para poder borrarlo con splice
+    // Comprobamos con !== -1 que se ha encontrado el id en el array, y lo eliminamos
+    if (gastos.findIndex(itemGasto => itemGasto.id === idGasto) !== -1) { 
+        gastos.splice(gastos.findIndex(itemGasto => itemGasto.id === idGasto), 1);
+    }
+    /* Función Anónima en vez de flecha:
+    gastos.findIndex(function(itemGasto) {
+    return itemGasto.id === idGasto;
+    }); */
 }
 
 function calcularTotalGastos() {
-
+    return gastos.reduce((acumulador, itemActual) => acumulador + itemActual.valor, 0); // 0 es el valor inicial del acumulador
+                                                                                        // OJO que accedemos a la propiedad valor
 }
 
 function calcularBalance() {
@@ -71,7 +83,6 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
         for (let i = 0; i < this.etiquetas.length; i++) {
             etiquetasListadas += ` - ${this.etiquetas[i]}\n`;
         }
-
         return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €.\n
         Fecha: ${new Date(this.fecha).toLocaleString()}\nEtiquetas:\n${etiquetasListadas}`; // new Date para convertir el timestamp en objeto Date,
     }
