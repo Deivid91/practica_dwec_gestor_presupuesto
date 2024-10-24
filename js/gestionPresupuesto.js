@@ -21,6 +21,26 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
+function listarGastos() {
+   return gastos;
+}
+
+function anyadirGasto() {
+
+}
+
+function borrarGasto() {
+
+}
+
+function calcularTotalGastos() {
+
+}
+
+function calcularBalance() {
+
+}
+
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
     this.descripcion = (typeof descripcion === 'string') ? descripcion : String(descripcion);
     this.valor = (typeof valor === 'number' && valor >= 0) ? valor : 0;
@@ -57,33 +77,22 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
     }
 
     this.actualizarFecha = function(nuevaFecha) {
-        // TODO
+        if (!isNaN(Date.parse(nuevaFecha))) {
+            this.fecha = Date.parse(nuevaFecha);
+        }
+        else
+            console.log("Fecha introducida no válida.");
     }
 
     this.anyadirEtiquetas = function(...nuevasEtiquetas) {
         // TODO (sin duplicados)
     }
+    
+    this.borrarEtiquetas = function(...etiquetasAEliminar) {
+        // TODO (borrar etiq. existentes. Informar si no existen)
+    }
 }
 
-function listarGastos() {
-    return gastos;
-}
-
-function anyadirGasto() {
-
-}
-
-function borrarGasto() {
-
-}
-
-function calcularTotalGastos() {
-
-}
-
-function calcularBalance() {
-
-}
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
@@ -98,5 +107,3 @@ export   {
     calcularTotalGastos,
     calcularBalance
 }
-
-module.exports = crearGasto;
