@@ -50,7 +50,8 @@ function calcularTotalGastos() {
 }
 
 function calcularBalance() {
-
+    let gastosTotales = calcularTotalGastos();
+    return presupuesto - gastosTotales;
 }
 
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
