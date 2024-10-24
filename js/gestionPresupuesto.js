@@ -93,7 +93,11 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
     }
     
     this.borrarEtiquetas = function(...etiquetasAEliminar) {
-        // TODO (borrar etiq. existentes. Informar si no existen)
+        for (let i = 0; i < etiquetasAEliminar.length; i++) {
+            if (this.etiquetas.includes(etiquetasAEliminar[i])) {
+                this.etiquetas.splice(this.etiquetas.indexOf(etiquetasAEliminar[i]), 1); // Usamos indexOf puesto que para usar splice necesitamos saber la posición del ítem.
+            }
+        }
     }
 }
 
