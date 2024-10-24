@@ -21,9 +21,12 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto(descripcion, valor) {
-    this.descripcion = descripcion;
+function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
+    this.descripcion = (typeof descripcion === 'string') ? descripcion : String(descripcion);
     this.valor = (typeof valor === 'number' && valor >= 0) ? valor : 0;
+    this.fecha = isNaN(Date.parse(fecha)) ? Date.now() : Date.parse(fecha); // Date.parse(fecha) podría devolver isNaN, en cuyo caso la fecha no sería válida 
+                                                                            // (los timestamp se representan en forma de número) 
+    this.etiquetas = etiquetas;
 
     this.mostrarGasto = function() {
         return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
@@ -41,11 +44,29 @@ function CrearGasto(descripcion, valor) {
             console.log("Error: Introduzca un número no negativo.");
         };
     }
+
+    this.mostrarGastoCompleto = function() {
+        let etiquetasListadas = "";
+
+        for (let i = 0; i < this.etiquetas.length; i++) {
+            etiquetasListadas += ` - ${this.etiquetas[i]}\n`;
+        }
+
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €.\n
+        Fecha: ${new Date(this.fecha).toLocaleString()}\nEtiquetas:\n${etiquetasListadas}`; // new Date para convertir el timestamp en objeto Date,
+    }
+
+    this.actualizarFecha = function(nuevaFecha) {
+        // TODO
+    }
+
+    this.anyadirEtiquetas = function(...nuevasEtiquetas) {
+        // TODO (sin duplicados)
+    }
 }
 
-// Práctica Fundamentos de JavaScript II
 function listarGastos() {
-
+    return gastos;
 }
 
 function anyadirGasto() {
@@ -77,3 +98,5 @@ export   {
     calcularTotalGastos,
     calcularBalance
 }
+
+module.exports = crearGasto;
