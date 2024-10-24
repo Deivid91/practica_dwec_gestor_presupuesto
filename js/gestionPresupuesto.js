@@ -82,10 +82,10 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
         let etiquetasListadas = "";
 
         for (let i = 0; i < this.etiquetas.length; i++) {
-            etiquetasListadas += ` - ${this.etiquetas[i]}\n`;
+            etiquetasListadas += `- ${this.etiquetas[i]}\n`;
         }
-        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €.\n
-        Fecha: ${new Date(this.fecha).toLocaleString()}\nEtiquetas:\n${etiquetasListadas}`; // new Date para convertir el timestamp en objeto Date,
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €.`+
+        `\nFecha: ${new Date(this.fecha).toLocaleString()}\nEtiquetas:\n${etiquetasListadas}`; // new Date para convertir el timestamp en objeto Date,
     }
 
     this.actualizarFecha = function(nuevaFecha) {
