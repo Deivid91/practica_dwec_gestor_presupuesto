@@ -55,11 +55,11 @@ function calcularBalance() {
 }
 
 function filtrarGastos() {
-
+    // TODO
 }
 
 function agruparGastos() {
-
+    // TODO
 }
 
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
@@ -117,6 +117,30 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
             if (this.etiquetas.includes(etiquetasAEliminar[i])) {
                 this.etiquetas.splice(this.etiquetas.indexOf(etiquetasAEliminar[i]), 1); // Usamos indexOf puesto que para usar splice necesitamos saber la posición del ítem.
             }
+        }
+    }
+
+    this.obtenerPeriodoAgrupacion =  function(periodo) {
+        const fech = new Date(this.fecha); // Convirtiendo timestamp (número) a objeto Date
+
+        const dia = String(fech.getDate()).padStart(2, '0'); /* Se utiliza el padStart para meter el 0 delante
+                                                                si el día es de un dígito. padStart() está diseñado para strings,
+                                                                de ahí la conversión.*/
+        const mes = String(fech.getMonth() + 1).padStart(2, '0'); 
+        const anyo = fech.getFullYear();
+
+        if (periodo === "dia") {
+            return `${anyo}-${mes}-${dia}`;
+        }
+        else if (periodo === "mes") {
+            return `${anyo}-${mes}`;
+        }
+        else if (periodo === "anyo") {
+            return `${anyo}`;
+        }
+        else {
+            console.log("Valor no válido.");
+            return null;
         }
     }
 }
