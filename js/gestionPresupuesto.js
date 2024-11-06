@@ -56,37 +56,29 @@ function calcularBalance() {
 
 function filtrarGastos(filtro) {
     return gastos.filter(gasto => {
-        let res = true;
 
-        if (filtro.fechaDesde) {
-            let fechaD = Date.parse(filtro.fechaDesde);
-            res = res && (gasto.fecha >= fechaD);
+        if (filtro.fechaDesde && gasto.fecha < Date.parse(filtro.fechaDesde)) {
+            return false;
         }
-        if (filtro.fechaHasta) {
-            let fechaH = Date.parse(filtro.fechaHasta);
-            res = res && (gasto.fecha <= fechaH);
+        if (filtro.fechaHasta && gasto.fecha > Date.parse(filtro.fechaHasta)) {
+            return false;
         }
-        if (filtro.valorMinimo) {
-            res = res && (gasto.valor >= filtro.valorMinimo);
+        if (filtro.valorMinimo && gasto.valor < filtro.valorMinimo) {
+            return false;
         }
-        if (filtro.valorMaximo) {
-            res = res && (gasto.valor <= filtro.valorMaximo);
+        if (filtro.valorMaximo && gasto.valor > filtro.valorMaximo) {
+            return false;
         }
-        if (filtro.descripcionContiene) {
-            res = res && (gasto.descripcion.toLowerCase().indexOf(filtro.descripcionContiene.toLowerCase()) > -1);
+        if (filtro.descripcionContiene && gasto.descripcion.toLowerCase().indexOf(filtro.descripcionContiene.toLowerCase()) === -1) {
+            return false;
         }
         if (filtro.etiquetasTiene) {
-            let tiene = false;
-            for (let etiq of filtro.etiquetasTiene) {
-                if (gasto.etiquetas.some(gastoEt => gastoEt.toLowerCase() === etiq.toLowerCase())) {
-                    tiene = true;
-                    break;
-                }
+            let tiene = filtro.etiquetasTiene.some(etiq => gasto.etiquetas.some(gastoEt => gastoEt.toLowerCase() === etiq.toLowerCase()));
+            if (!tiene) {
+                return false;
             }
-            res = res && tiene;
         }
-
-        return res;
+        return true;
     });
 }
 
