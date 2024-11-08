@@ -82,8 +82,26 @@ function filtrarGastos(filtro) {
     });
 }
 
-function agruparGastos() {
-    // TODO
+function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
+    // Objeto filtro
+    const filtr = {
+        fechaDesde: fechaDesde,
+        fechaHasta: fechaHasta,
+        etiquetasTiene: etiquetas
+    };
+    const gastosFiltrados = filtrarGastos(filtr);
+
+    return gastosFiltrados.reduce((acc, gasto) => {
+        let period = gasto.obtenerPeriodoAgrupacion(periodo);
+
+        if (acc[period]) {
+            acc[period] += gasto.valor;
+        }
+        else{
+            acc[period] = gasto.valor;
+        }
+        return acc;
+    }, {}) // OJO a las llaves {}, porque es objeto (como valor inicial vacío) / Usaríamos [] para array.
 }
 
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
