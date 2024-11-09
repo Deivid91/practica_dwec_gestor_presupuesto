@@ -54,10 +54,13 @@ function calcularBalance() {
     return presupuesto - gastosTotales;
 }
 
-function filtrarGastos(filtro) {
+//* PARA ENTENDER LA SIGUIENTE FUNCIÓN, VER PRIMERO agruparGastos
+function filtrarGastos(filtro) { /* el parámetro filtro representa el objeto filtr que se crea en agruparGastos (siguiente función). 
+                                    Las propiedades del objeto filtro deben tener el mismo nombre que las propiedades
+                                    del parámetro de filtrarGastos (fechaDesde, fechaHasta, etiquetasTiene) */
     return gastos.filter(gasto => {
 
-        if (filtro.fechaDesde && gasto.fecha < Date.parse(filtro.fechaDesde)) {
+        if (filtro.fechaDesde && gasto.fecha < Date.parse(filtro.fechaDesde)) { // Convertir fechaDesde a timestamp (Date.parse) para poder compararlo
             return false;
         }
         if (filtro.fechaHasta && gasto.fecha > Date.parse(filtro.fechaHasta)) {
@@ -83,25 +86,30 @@ function filtrarGastos(filtro) {
 }
 
 function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
-    // Objeto filtro
+    // Se define objeto filtro con unas propiedades 
     const filtr = {
         fechaDesde: fechaDesde,
         fechaHasta: fechaHasta,
         etiquetasTiene: etiquetas
     };
-    const gastosFiltrados = filtrarGastos(filtr);
+    const gastosFiltrados = filtrarGastos(filtr); 
 
+    // Agregamos los gastos por periodo
+    // acc: ACUMULADO
+    // gasto: ACTUAL
     return gastosFiltrados.reduce((acc, gasto) => {
         let period = gasto.obtenerPeriodoAgrupacion(periodo);
 
+        // Si el mes ya existe, sumamos el valor del gasto
         if (acc[period]) {
             acc[period] += gasto.valor;
         }
+        // Si no existe, se crea y se asigna el valor del gasto
         else{
             acc[period] = gasto.valor;
         }
         return acc;
-    }, {}) // OJO a las llaves {}, porque es objeto (como valor inicial vacío) / Usaríamos [] para array.
+    }, {}) // OJO a las llaves {}, porque es objeto (como VALOR INICIAL vacío) / Usaríamos [] para array.
 }
 
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
