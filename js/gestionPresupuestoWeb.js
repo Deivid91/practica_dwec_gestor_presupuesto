@@ -4,8 +4,8 @@ function mostrarDatoEnId(idElemento, valor) {
 
 function mostrarGastoWeb(idElemento, gasto) {
     // CREANDO elementos
-    let gasto = document.createElement("div");
-    gasto.classList.add("gasto");
+    let gast = document.createElement("div"); // NO LLAMAR A LA VARIABLE IGUAL QUE EL PARÁMETRO (GASTO)
+    gast.classList.add("gasto");
 
     let gastoDescripcion = document.createElement("div");
     gastoDescripcion.classList.add("gasto-descripcion");
@@ -17,23 +17,27 @@ function mostrarGastoWeb(idElemento, gasto) {
     
     let gastoValor = document.createElement("div");
     gastoValor.classList.add("gasto-valor");
-    gastoValor.textContent = "gasto.valor";
+    gastoValor.textContent = gasto.valor;
 
     let gastoEtiquetas = document.createElement("div");
     gastoEtiquetas.classList.add("gasto-etiquetas");
 
-    gasto.etiqueta.forEach((et) => {
-        let gastoEtiquetasEtiqueta = document.createElement("span");
-        gastoEtiquetasEtiqueta.classList.add("gasto-etiquetas-etiqueta");
-        gastoEtiquetasEtiqueta.textContent = et;
-
-        gastoEtiquetas.append(gastoEtiquetasEtiqueta);
-    });
+    if (Array.isArray(gasto.etiquetas)) { // Verificamos si gasto.etiquetas es array. Si no lo es, 
+                                          // JS se saltará el forEach SIN GENERAR ERROR (forEach sólo funciona en arrays)
+                                          
+        gasto.etiquetas.forEach((et) => {
+            let gastoEtiquetasEtiqueta = document.createElement("span");
+            gastoEtiquetasEtiqueta.classList.add("gasto-etiquetas-etiqueta");
+            gastoEtiquetasEtiqueta.textContent = et;
+    
+            gastoEtiquetas.append(gastoEtiquetasEtiqueta);
+        });
+    }
 
     // AÑADIENDO elementos
-    gasto.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas);
+    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas);
 
-    document.getElementById(idElemento).append(gasto);
+    document.getElementById(idElemento).append(gast);
 }
 
 

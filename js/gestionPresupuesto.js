@@ -112,7 +112,7 @@ function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
     }, {}) // OJO a las llaves {}, porque es objeto (como VALOR INICIAL vacío) / Usaríamos [] para array.
 }
 
-function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
+function CrearGasto(descripcion, valor, fecha, ...etiquetas) {  // Función constructora
     this.descripcion = (typeof descripcion === 'string') ? descripcion : String(descripcion);
     this.valor = (typeof valor === 'number' && valor >= 0) ? valor : 0;
     this.fecha = isNaN(Date.parse(fecha)) ? Date.now() : Date.parse(fecha); // Date.parse(fecha) podría devolver isNaN, en cuyo caso la fecha no sería válida 
