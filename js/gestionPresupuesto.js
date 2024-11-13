@@ -99,7 +99,7 @@ function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
     // gasto: ACTUAL
     return gastosFiltrados.reduce((acc, gasto) => {
         let period = gasto.obtenerPeriodoAgrupacion(periodo);
-
+        
         // Si el mes ya existe, sumamos el valor del gasto
         if (acc[period]) {
             acc[period] += gasto.valor;

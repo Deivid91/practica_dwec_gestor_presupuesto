@@ -63,12 +63,12 @@ gastosEtiqYMenor50.forEach(gasto => {
 
 // Mostrar el total de gastos agrupados por día en div#agrupacion-dia
 const agruparPorDia = gestionPresupuesto.agruparGastos("dia");
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-dia", agruparPorDia, "dia");
+gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-dia", agruparPorDia, "día");
 
 // Mostrar el total de gastos agrupados por mes en div#agrupacion-mes
 const agruparPorMes = gestionPresupuesto.agruparGastos("mes");
 gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-mes", agruparPorMes, "mes");
 
 // Mostrar el total de gastos agrupados por año en div#agrupacion-anyo
-const agruparPoranyo = gestionPresupuesto.agruparGastos("anyo");
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-anyo", agruparPoranyo, "anyo");
+const agruparPorAnyo = gestionPresupuesto.agruparGastos("anyo");
+gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-anyo", agruparPorAnyo, "año");
