@@ -1,3 +1,7 @@
+// PROGRAMA QUE USARÁ DOS PROGRAMAS (UTILIZADOS COMO LIBRERÍAS): 
+// Librería js/gestionPresupuestoWeb.js y Librería js/gestionPresupuesto.js
+// LA FUNCIÓN DE ESTE ARCHIVO EES CREAR UNOS GASTOS INICIALES PARA PODER HACER PRUEBAS
+
 // Importación de todas las funciones de los dos ficheros indicados
 import * as gestionPresupuesto from './gestionPresupuesto.js';
 import * as gestionPresupuestoWeb from './gestionPresupuestoWeb.js';
@@ -63,7 +67,7 @@ gastosEtiqYMenor50.forEach(gasto => {
 
 // Mostrar el total de gastos agrupados por día en div#agrupacion-dia
 const agruparPorDia = gestionPresupuesto.agruparGastos("dia");
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-dia", agruparPorDia, "día");
+gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-dia", agruparPorDia, "día"); // OJO a la tilde
 
 // Mostrar el total de gastos agrupados por mes en div#agrupacion-mes
 const agruparPorMes = gestionPresupuesto.agruparGastos("mes");
@@ -71,4 +75,4 @@ gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-mes", agruparPorMes,
 
 // Mostrar el total de gastos agrupados por año en div#agrupacion-anyo
 const agruparPorAnyo = gestionPresupuesto.agruparGastos("anyo");
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-anyo", agruparPorAnyo, "año");
+gestionPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-anyo", agruparPorAnyo, "año"); // OJO a aÑo

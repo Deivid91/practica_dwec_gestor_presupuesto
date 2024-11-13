@@ -1,3 +1,5 @@
+// PROGRAMA/LIBRERÍA QUE CONTIENE LA LÓGICA DE NEGOCIO DE LA APLICACIÓN
+
 // TODO: Crear las funciones, objetos y variables indicadas en el enunciado
 
 // Variable global
