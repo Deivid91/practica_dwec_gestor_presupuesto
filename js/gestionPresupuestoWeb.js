@@ -1,7 +1,64 @@
 // PROGRAMA/LIBRERÍA QUE DEFINIRÁ UNA SERIE DE FUNCIONES PARA INTERACTUAR CON EL DOM Y MOSTRAR LOS DATOS EN HTML
 
-import * as gestionPresupuesto from './gestionPresupuesto.js';
+import * as gestionPresupuesto from "./gestionPresupuesto.js";
 
+//* MANEJADORES DE EVENTOS
+function EditarHandle(gasto) {
+    this.gasto = gasto;
+}
+/* handleEvent: Cuando creemos un objeto basado en su prototipo, 
+asignaremos a dicho objeto una propiedad llamada gasto, que será una referencia al gasto 
+que estemos editando. El código de la función handleEvent podrá hacer referencia a dicho 
+gasto a través de this.gasto, ya que es una propiedad del objeto */
+EditarHandle.prototype.handleEvent = function() {
+    let editeDescripcion = prompt("Edita la descripción del gasto", this.gasto.descripcion);
+    let editeValor = prompt("Edite el valor del gasto", this.gasto.valor);
+    let editeFecha = prompt("Edite la fecha del gasto (formato yyyy-mm-dd)", this.gasto.fecha);
+    let editeEtiquetas = prompt("Edite las etiquetas del gasto (separe cada una con una coma)", this.gasto.etiquetas);
+
+    editeValor = parseFloat(editeValor);
+    editeEtiquetas = editeEtiquetas.split(", "); // .split convierte string a array (entre paréntesis el delimitante)
+    
+    this.gasto.actualizarValor(editeValor);
+    this.gasto.actualizarDescripcion(editeDescripcion);
+    this.gasto.actualizarFecha(editeFecha);
+    this.gasto.anyadirEtiquetas(...editeEtiquetas);
+
+    repintar();
+}
+
+// handleEvent se define en el prototipo de BorrarHandle.
+// De este modo, todas las instancias de BorrarHandle compartirán el mismo método handleEvent
+function BorrarHandle(gasto) {
+    this.gasto = gasto;
+} 
+BorrarHandle.prototype.handleEvent = function() {
+    gestionPresupuesto.borrarGasto(this.gasto.id);
+    repintar();
+}
+
+// OTRA FORMA, donde handleEvent se define directamente en dentro de la función constructora.
+// Cada instancia de BorrarHandle tendrá su propia copia del método handleEvent.
+/* function BorrarHandle(gasto) {
+    this.gasto = gasto
+    this.handleEvent = function() {
+        gestionPresupuesto.borrarGasto(this.gasto.id);
+        repintar();
+    }
+} 
+*/
+
+function BorrarEtiquetasHandle(gasto, etiqueta) {
+    this.gasto = gasto;
+    this.etiqueta = etiqueta;
+}
+BorrarEtiquetasHandle.prototype.handleEvent = function() {
+    this.gasto.borrarEtiquetas(this.etiqueta);
+    repintar();
+}
+
+
+//* FUNCIONES DE INTERFAZ DE USUARIO
 function mostrarDatoEnId(idElemento, valor) {
     document.getElementById(idElemento).textContent = valor;
 }
@@ -34,12 +91,35 @@ function mostrarGastoWeb(idElemento, gasto) {
             gastoEtiquetasEtiqueta.classList.add("gasto-etiquetas-etiqueta");
             gastoEtiquetasEtiqueta.textContent = et;
     
+            // Manejador de evento para borrar etiquetas
+            let manejadorBorrarEtiquetas = new BorrarEtiquetasHandle(gasto, et);
+            gastoEtiquetasEtiqueta.addEventListener("click", manejadorBorrarEtiquetas);
+
             gastoEtiquetas.append(gastoEtiquetasEtiqueta);
         });
     }
 
+    // Creación botones para editar y borrar y manejadores de eventos 
+    const botonEditar = document.createElement("button");
+    botonEditar.textContent = "Editar";
+    botonEditar.type = "button";
+    botonEditar.classList.add("gasto-editar");
+
+    // Creación de instancia de EditarHandle. Se pasa el objeto gasto
+    let manejadorEditar = new EditarHandle(gasto); // Ya no es necesario hacer: manejadorEditar.gasto = gasto,
+                                                   // puesto que ya se establece en el constructor de EditarHandle
+    botonEditar.addEventListener("click", manejadorEditar);
+
+    const botonBorrar = document.createElement("button");
+    botonBorrar.textContent = "Borrar";
+    botonBorrar.type = "button";
+    botonBorrar.classList.add("gasto-borrar");
+
+    let manejadorBorrar = new BorrarHandle(gasto);
+    botonBorrar.addEventListener("click", manejadorBorrar);
+
     // AÑADIENDO elementos
-    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas);
+    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas, botonEditar, botonBorrar);
 
     document.getElementById(idElemento).append(gast);
 }
@@ -77,7 +157,7 @@ function repintar() {
     mostrarDatoEnId("presupuesto", gestionPresupuesto.mostrarPresupuesto());
     mostrarDatoEnId("gastos-totales", gestionPresupuesto.calcularTotalGastos());
     mostrarDatoEnId("balance-total", gestionPresupuesto.calcularBalance());
-    document.getElementById("listado-gastos-completos").innerHTML = "";
+    document.getElementById("listado-gastos-completo").innerHTML = "";
     const mostrarListadoGastos = gestionPresupuesto.listarGastos();
     mostrarListadoGastos.forEach(gast => {
         mostrarGastoWeb("listado-gastos-completo", gast);
@@ -86,65 +166,37 @@ function repintar() {
 
 function actualizarPresupuestoWeb() {
     const introduzcaPresupuesto = prompt("Introduzca un presupuesto", "");
-    parseFloat(introduzcaPresupuesto);
-    if (!isNaN(introduzcaPresupuesto)) {
-        gestionPresupuesto.actualizarPresupuesto(introduzcaPresupuesto);
+    const presupuestoANumero = parseFloat(introduzcaPresupuesto);
+    if (!isNaN(presupuestoANumero)) {
+        gestionPresupuesto.actualizarPresupuesto(presupuestoANumero);
         repintar(); // Actualizar el presupuesto provoca cambios en el balance, por lo que al ejecutar repintar se actualizarán ambos campos
     }
     else {
         alert("Introduzca un número válido.");
     }
-
-    // Añadir función como manejadora del evento del botón actualizarpresupuesto
-    document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
 }
 
-function EditarHandle(gasto) {
-    this.gasto = gasto;
-    
-    /* handleEvent: Cuando creemos un objeto basado en su prototipo, 
-    asignaremos a dicho objeto una propiedad llamada gasto, que será una referencia al gasto 
-    que estemos editando. El código de la función handleEvent podrá hacer referencia a dicho 
-    gasto a través de this.gasto, ya que es una propiedad del objeto */
-    this.handleEvent = function() {
-        const editeDescripcion = prompt("Edita la descripción del gasto", this.gasto.descripcion);
-        const editeValor = prompt("Edite el valor del gasto", this.gasto.valor);
-        const editeFecha = prompt("Edite la fecha del gasto (formato yyyy-mm-dd)", this.gasto.fecha);
-        const editeEtiquetas = prompt("Edite las etiquetas del gasto (separe cada una con una coma)", this.gasto.etiquetas);
+function nuevoGastoWeb() {
+    let introduzcaDescripcion = prompt("Introduzca la descripción del gasto", "");
+    let introduzcaValor = prompt("Introduzca el valor del gasto", "");
+    let introduzcaFecha = prompt("Introduzca la fecha en formato yyyy-mm-dd", "");
+    let introduzcaEtiquetas = prompt("Introduzca la/s etiqueta/s del gasto", "");
 
-        parseFloat(editeValor);
-        editeEtiquetas = editeEtiquetas.split(", "); // .split convierte string a array (entre paréntesis el delimitante)
-        
-        this.gasto.actualizarValor;
-        this.gasto.actualizarDescripcion;
-        this.gasto.actualizarFecha;
-        this.gasto.anyadirEtiquetas;
+    introduzcaValor = parseFloat(introduzcaValor);
+    introduzcaEtiquetas = introduzcaEtiquetas.split(", ");
 
-        repintar();
-    }
+    let nuevoGasto = new gestionPresupuesto.CrearGasto(introduzcaDescripcion, introduzcaValor, introduzcaFecha, ...introduzcaEtiquetas);
+    gestionPresupuesto.anyadirGasto(nuevoGasto);
+    repintar();
 }
 
-function BorrarHandle(gasto) {
-    this.gasto = gasto
-    this.handleEvent = function() {
-        const editeDescripcion = prompt("Edita la descripción del gasto", this.gasto.descripcion);
-        const editeValor = prompt("Edite el valor del gasto", this.gasto.valor);
-        const editeFecha = prompt("Edite la fecha del gasto (formato yyyy-mm-dd)", this.gasto.fecha);
-        const editeEtiquetas = prompt("Edite las etiquetas del gasto (separe cada una con una coma)", this.gasto.etiquetas);
+//* INICIALIZADORES DE EVENTO
+document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
 
-        parseFloat(editeValor);
-        editeEtiquetas = editeEtiquetas.split(", "); // .split convierte string a array (entre paréntesis el delimitante)
-        
-        this.gasto.actualizarValor;
-        this.gasto.actualizarDescripcion;
-        this.gasto.actualizarFecha;
-        this.gasto.anyadirEtiquetas;
-
-        repintar();
-    }
-}
+document.getElementById("anyadirgasto").addEventListener("click", nuevoGastoWeb);
 
 
+//* EXPORTACIÓN DE FUNCIONES
 export {
     mostrarDatoEnId,
     mostrarGastoWeb,
