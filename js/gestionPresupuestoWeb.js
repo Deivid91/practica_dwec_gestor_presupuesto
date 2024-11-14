@@ -190,6 +190,39 @@ function nuevoGastoWeb() {
     repintar();
 }
 
+function nuevoGastoWebFormulario() {
+    // Crear una copia del formulario web definido en la plantilla HTML
+    let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);;
+    
+    // Acceder al elemento <form> dentro de ese fragmento de documento
+    let formulario = plantillaFormulario.querySelector("form");
+}
+
+function manejadorEnvioFormulario(eventoEnvio) {
+    // No recargar página para no enviar formulario
+    eventoEnvio.preventDefault();
+
+    // Obtener formulario
+    let formulario = eventoEnvio.currentTarget;
+
+    let descripcion = formulario.descripcion.value;
+    let valor = Number(formulario.valor.value);
+    let fecha = Date.parse(formulario.fecha.value);
+    let etiquetas = formulario.etiquetas.value.split(", ");
+
+    let gasto = new gestionPresupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
+    gestionPresupuesto.anyadirGasto(gasto);
+    
+    repintar();
+
+    // Reactivar botón anyadirgasto-formulario
+    document.getElementById(anyadirgasto-formulario).disabled = false;
+}
+
+function manejadorClicCancelar(eventoCancelar) {
+    
+}
+
 //* INICIALIZADORES DE EVENTO
 document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
 
