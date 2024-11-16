@@ -2,7 +2,7 @@
 
 import * as gestionPresupuesto from "./gestionPresupuesto.js";
 
-//* MANEJADORES DE EVENTOS
+//* FUNCIONES CONSTRUCTORAS DE MANEJADORES DE EVENTOS
 function EditarHandle(gasto) {
     this.gasto = gasto;
 }
@@ -12,13 +12,10 @@ que estemos editando. El código de la función handleEvent podrá hacer referen
 gasto a través de this.gasto, ya que es una propiedad del objeto */
 EditarHandle.prototype.handleEvent = function() {
     let editeDescripcion = prompt("Edita la descripción del gasto", this.gasto.descripcion);
-    let editeValor = prompt("Edite el valor del gasto", this.gasto.valor);
+    let editeValor = parseFloat(prompt("Edite el valor del gasto", this.gasto.valor));
     let editeFecha = prompt("Edite la fecha del gasto (formato yyyy-mm-dd)", this.gasto.fecha);
-    let editeEtiquetas = prompt("Edite las etiquetas del gasto (separe cada una con una coma)", this.gasto.etiquetas);
+    let editeEtiquetas = prompt("Edite las etiquetas del gasto (separe cada una con una coma)", this.gasto.etiquetas.join(", "));
 
-    editeValor = parseFloat(editeValor);
-    editeEtiquetas = editeEtiquetas.split(", "); // .split convierte string a array (entre paréntesis el delimitante)
-    
     this.gasto.actualizarValor(editeValor);
     this.gasto.actualizarDescripcion(editeDescripcion);
     this.gasto.actualizarFecha(editeFecha);
@@ -37,7 +34,7 @@ BorrarHandle.prototype.handleEvent = function() {
     repintar();
 }
 
-// OTRA FORMA, donde handleEvent se define directamente en dentro de la función constructora.
+// OTRA FORMA, donde handleEvent se define directamente dentro de la función constructora.
 // Cada instancia de BorrarHandle tendrá su propia copia del método handleEvent.
 /* function BorrarHandle(gasto) {
     this.gasto = gasto
@@ -57,6 +54,48 @@ BorrarEtiquetasHandle.prototype.handleEvent = function() {
     repintar();
 }
 
+function CancelarFormularioHandle(formulario, botonAnyadirGasto) {
+    this.formulario = formulario;
+    this.botonAnyadirGasto = botonAnyadirGasto;
+}
+CancelarFormularioHandle.prototype.handleEvent = function() {
+    this.formulario.remove();
+    this.botonAnyadirGasto.disabled = false;
+}
+
+function EditarHandleFormulario(gasto) {
+    this.gasto = gasto;
+}
+EditarHandleFormulario.prototype.handleEvent = function() {
+    let gasto = document.querySelector(`#gasto-${this.gasto.id}`);
+    let formulario = gasto.querySelector("form");
+
+    // Crear una copia del formulario web definido en la plantilla HTML (SI NO EXISTE)
+   
+    let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);
+    formulario = plantillaFormulario.querySelector("form");
+
+    formulario.descripcion.value = this.gasto.descripcion;
+    formulario.valor.value = this.gasto.valor;
+    formulario.fecha.value = this.gasto.fecha;
+    formulario.etiquetas.value = this.gasto.etiquetas.join(",");
+
+    gasto.append(formulario);
+    
+    formulario.gasto = this.gasto;
+
+    let botonAnyadirGastoFormulario = document.getElementById("anyadirgasto-formulario");
+    botonAnyadirGastoFormulario.disabled = true;
+    let botonEditarForm = document.querySelector(`#gasto-${this.gasto.id} .gasto-editar-formulario`);
+    botonEditarForm.disabled = true;
+    
+    let botonCancelar = formulario.querySelector("button.cancelar");
+    let manejarCancelar = new CancelarFormularioHandle(formulario, botonEditarForm);
+    botonCancelar.addEventListener("click", manejarCancelar);
+
+    formulario.addEventListener("submit", manejadorEnvioEditarFormulario);
+}
+
 
 //* FUNCIONES DE INTERFAZ DE USUARIO
 function mostrarDatoEnId(idElemento, valor) {
@@ -67,6 +106,7 @@ function mostrarGastoWeb(idElemento, gasto) {
     // CREANDO elementos
     let gast = document.createElement("div"); // NO LLAMAR A LA VARIABLE IGUAL QUE EL PARÁMETRO (GASTO)
     gast.classList.add("gasto");
+    gast.id = `gasto-${gasto.id}`; // Cada gasto tendrá su ID
 
     let gastoDescripcion = document.createElement("div");
     gastoDescripcion.classList.add("gasto-descripcion");
@@ -100,6 +140,8 @@ function mostrarGastoWeb(idElemento, gasto) {
     }
 
     // Creación botones para editar y borrar y manejadores de eventos 
+
+    // BOTÓN EDITAR
     const botonEditar = document.createElement("button");
     botonEditar.textContent = "Editar";
     botonEditar.type = "button";
@@ -110,6 +152,7 @@ function mostrarGastoWeb(idElemento, gasto) {
                                                    // puesto que ya se establece en el constructor de EditarHandle
     botonEditar.addEventListener("click", manejadorEditar);
 
+    // BOTÓN BORRAR
     const botonBorrar = document.createElement("button");
     botonBorrar.textContent = "Borrar";
     botonBorrar.type = "button";
@@ -118,8 +161,17 @@ function mostrarGastoWeb(idElemento, gasto) {
     let manejadorBorrar = new BorrarHandle(gasto);
     botonBorrar.addEventListener("click", manejadorBorrar);
 
+    // BOTÓN EDITAR FORMULARIO
+    const botonEditarFormulario = document.createElement("button");
+    botonEditarFormulario.textContent = "Editar (formulario)";
+    botonEditarFormulario.type = "button";
+    botonEditarFormulario.classList.add("gasto-editar-formulario");
+
+    let manejadorEditarFormulario = new EditarHandleFormulario(gasto);
+    botonEditarFormulario.addEventListener("click", manejadorEditarFormulario);
+
     // AÑADIENDO elementos
-    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas, botonEditar, botonBorrar);
+    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas, botonEditar, botonBorrar, botonEditarFormulario);
 
     document.getElementById(idElemento).append(gast);
 }
@@ -165,7 +217,7 @@ function repintar() {
 }
 
 function actualizarPresupuestoWeb() {
-    const introduzcaPresupuesto = prompt("Introduzca un presupuesto", "");
+    const introduzcaPresupuesto = prompt("Introduzca un presupuesto", "0");
     const presupuestoANumero = parseFloat(introduzcaPresupuesto);
     if (!isNaN(presupuestoANumero)) {
         gestionPresupuesto.actualizarPresupuesto(presupuestoANumero);
@@ -192,10 +244,22 @@ function nuevoGastoWeb() {
 
 function nuevoGastoWebFormulario() {
     // Crear una copia del formulario web definido en la plantilla HTML
-    let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);;
+    let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);
     
     // Acceder al elemento <form> dentro de ese fragmento de documento
     let formulario = plantillaFormulario.querySelector("form");
+
+    // Desactivar botón de añadir gastos
+    const botonAnyadirGasto = document.getElementById("anyadirgasto-formulario");
+    botonAnyadirGasto.disabled = true;
+
+    document.getElementById("controlesprincipales").append(formulario);
+
+    let manejarCancelar = new CancelarFormularioHandle(formulario, botonAnyadirGasto);
+    formulario.querySelector("button.cancelar").addEventListener("click", manejarCancelar);
+
+    // Pasar función como manejadora de evento
+    formulario.addEventListener("submit", manejadorEnvioFormulario);
 }
 
 function manejadorEnvioFormulario(eventoEnvio) {
@@ -206,32 +270,57 @@ function manejadorEnvioFormulario(eventoEnvio) {
     let formulario = eventoEnvio.currentTarget;
 
     let descripcion = formulario.descripcion.value;
-    let valor = Number(formulario.valor.value);
+    let valor = parseFloat(formulario.valor.value);
     let fecha = Date.parse(formulario.fecha.value);
     let etiquetas = formulario.etiquetas.value.split(", ");
 
     let gasto = new gestionPresupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
     gestionPresupuesto.anyadirGasto(gasto);
-    
-    repintar();
-
     // Reactivar botón anyadirgasto-formulario
-    document.getElementById(anyadirgasto-formulario).disabled = false;
+    document.getElementById("anyadirgasto-formulario").disabled = false;
+
+    let botonEditarForm = document.querySelector(".gasto-editar-formulario");
+    botonEditarForm.disabled = false;
+    repintar();
+    formulario.remove()
 }
 
-function manejadorClicCancelar(eventoCancelar) {
-    
+function manejadorEnvioEditarFormulario(eventoEnvio) {
+    // No recargar página para no enviar formulario
+    eventoEnvio.preventDefault();
+
+    // Obtener formulario
+    let formulario = eventoEnvio.currentTarget;
+    let gasto = formulario.gasto;
+
+    let descripcion = formulario.descripcion.value;
+    let valor = parseFloat(formulario.valor.value);
+    let fecha = formulario.fecha.value;
+    let etiquetas = formulario.etiquetas.value.split(", ");
+
+    gasto.descripcion = descripcion;
+    gasto.valor = valor;
+    gasto.fecha = fecha;
+    gasto.etiquetas = etiquetas;
+
+    // Reactivar botón anyadirgasto-formulario
+    document.getElementById("anyadirgasto-formulario").disabled = false;
+
+    let botonEditarForm = document.querySelector(".gasto-editar-formulario");
+    botonEditarForm.disabled = false;
+    formulario.remove();
+    repintar();
 }
 
 //* INICIALIZADORES DE EVENTO
 document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
-
 document.getElementById("anyadirgasto").addEventListener("click", nuevoGastoWeb);
+document.getElementById("anyadirgasto-formulario").addEventListener("click", nuevoGastoWebFormulario);
 
 
 //* EXPORTACIÓN DE FUNCIONES
 export {
     mostrarDatoEnId,
     mostrarGastoWeb,
-    mostrarGastosAgrupadosWeb
+    mostrarGastosAgrupadosWeb,
 }
