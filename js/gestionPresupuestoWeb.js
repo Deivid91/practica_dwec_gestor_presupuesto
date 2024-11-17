@@ -71,17 +71,18 @@ EditarHandleFormulario.prototype.handleEvent = function() {
     let formulario = gasto.querySelector("form");
 
     // Crear una copia del formulario web definido en la plantilla HTML (SI NO EXISTE)
-   
-    let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);
-    formulario = plantillaFormulario.querySelector("form");
+    if (!formulario) {
+        let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);
+        formulario = plantillaFormulario.querySelector("form");
 
-    formulario.descripcion.value = this.gasto.descripcion;
-    formulario.valor.value = this.gasto.valor;
-    formulario.fecha.value = this.gasto.fecha;
-    formulario.etiquetas.value = this.gasto.etiquetas.join(",");
+        formulario.descripcion.value = this.gasto.descripcion;
+        formulario.valor.value = this.gasto.valor;
+        formulario.fecha.value = this.gasto.fecha;
+        formulario.etiquetas.value = this.gasto.etiquetas.join(",");
 
-    gasto.append(formulario);
-    
+        gasto.append(formulario);
+    }
+
     formulario.gasto = this.gasto;
 
     let botonAnyadirGastoFormulario = document.getElementById("anyadirgasto-formulario");
@@ -93,6 +94,10 @@ EditarHandleFormulario.prototype.handleEvent = function() {
     let manejarCancelar = new CancelarFormularioHandle(formulario, botonEditarForm);
     botonCancelar.addEventListener("click", manejarCancelar);
 
+    botonCancelar.addEventListener("click", function() {
+        botonAnyadirGastoFormulario.disabled = false;
+    });
+    
     formulario.addEventListener("submit", manejadorEnvioEditarFormulario);
 }
 
