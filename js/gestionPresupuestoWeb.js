@@ -31,7 +31,7 @@ function BorrarHandle(gasto) {
 } 
 BorrarHandle.prototype.handleEvent = function() {
     gestionPresupuesto.borrarGasto(this.gasto.id);
-    repintar();
+    repintar(); // Refleja los cambios en pantalla
 }
 
 // OTRA FORMA, donde handleEvent se define directamente dentro de la función constructora.
@@ -83,8 +83,6 @@ EditarHandleFormulario.prototype.handleEvent = function() {
         gasto.append(formulario);
     }
 
-    formulario.gasto = this.gasto;
-
     let botonAnyadirGastoFormulario = document.getElementById("anyadirgasto-formulario");
     botonAnyadirGastoFormulario.disabled = true;
     let botonEditarForm = document.querySelector(`#gasto-${this.gasto.id} .gasto-editar-formulario`);
@@ -98,7 +96,8 @@ EditarHandleFormulario.prototype.handleEvent = function() {
         botonAnyadirGastoFormulario.disabled = false;
     });
     
-    formulario.addEventListener("submit", manejadorEnvioEditarFormulario);
+    // Función flecha para que el this se refiera al manejador EditarHandleFormulario, no al formulario HTML
+    formulario.addEventListener("submit", (evento) => manejadorEnvioEditarFormulario(evento, this.gasto));
 }
 
 
@@ -290,13 +289,12 @@ function manejadorEnvioFormulario(eventoEnvio) {
     formulario.remove()
 }
 
-function manejadorEnvioEditarFormulario(eventoEnvio) {
+function manejadorEnvioEditarFormulario(eventoEnvio, gasto) {
     // No recargar página para no enviar formulario
     eventoEnvio.preventDefault();
 
     // Obtener formulario
     let formulario = eventoEnvio.currentTarget;
-    let gasto = formulario.gasto;
 
     let descripcion = formulario.descripcion.value;
     let valor = parseFloat(formulario.valor.value);
