@@ -1,6 +1,6 @@
 // PROGRAMA QUE USARÁ DOS PROGRAMAS (UTILIZADOS COMO LIBRERÍAS): 
 // Librería js/gestionPresupuestoWeb.js y Librería js/gestionPresupuesto.js
-// LA FUNCIÓN DE ESTE ARCHIVO EES CREAR UNOS GASTOS INICIALES PARA PODER HACER PRUEBAS
+// LA FUNCIÓN DE ESTE ARCHIVO ES CREAR UNOS GASTOS INICIALES PARA PODER HACER PRUEBAS
 
 // Importación de todas las funciones de los dos ficheros indicados
 import * as gestionPresupuesto from './gestionPresupuesto.js';
