@@ -114,6 +114,13 @@ function agruparGastos(periodo = "mes", etiquetas, fechaDesde, fechaHasta) {
     }, {}) // OJO a las llaves {}, porque es objeto (como VALOR INICIAL vacío) / Usaríamos [] para array.
 }
 
+function transformarListadoEtiquetas(etiquetas) {
+    return etiquetas.split(/[,.:;\s]+/);
+    // también return etiquetas.match(/\w+/g);
+}
+
+
+// Función constructora
 function CrearGasto(descripcion, valor, fecha, ...etiquetas) {  // Función constructora
     this.descripcion = (typeof descripcion === 'string') ? descripcion : String(descripcion);
     this.valor = (typeof valor === 'number' && valor >= 0) ? valor : 0;
@@ -212,5 +219,6 @@ export   {
     calcularTotalGastos,
     calcularBalance,
     filtrarGastos,
-    agruparGastos
+    agruparGastos,
+    transformarListadoEtiquetas
 }
