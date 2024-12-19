@@ -14,7 +14,7 @@ function actualizarPresupuesto(nuevoPresupuesto) {
         return presupuesto; 
     }
     else {
-        console.log("Error: Introduzca un número no negativo");
+        // console.log("Error: Introduzca un número no negativo");
         return -1;
     }
 }
@@ -167,9 +167,6 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {  // Función cons
         if (typeof nuevoValor === 'number' && nuevoValor >= 0) {
             this.valor = nuevoValor;
         }
-        else {
-            console.log("Error: Introduzca un número no negativo.");
-        };
     }
 
     this.mostrarGastoCompleto = function() {
