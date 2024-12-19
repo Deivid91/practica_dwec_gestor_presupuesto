@@ -315,10 +315,41 @@ function manejadorEnvioEditarFormulario(eventoEnvio, gasto) {
     repintar();
 }
 
+function filtrarGastosWeb(evento) {
+    evento.preventDefault();
+
+    const descripcion = document.getElementById("formulario-filtrado-descripcion").value;
+    const valorMinimo = document.getElementById("formulario-filtrado-valor-minimo").value;
+    const valorMaximo = document.getElementById("formulario-filtrado-valor-maximo").value;
+    const fechaInicial = document.getElementById("formulario-filtrado-fecha-desde").value;
+    const fechaFinal = document.getElementById("formulario-filtrado-fecha-hasta").value;
+    const etiquetas = document.getElementById("formulario-filtrado-etiquetas-tiene").value;
+
+    let arrayEtiquetas = [];
+    if (etiquetas.trim() !== "") {
+        arrayEtiquetas = gestionPresupuesto.transformarListadoEtiquetas(etiquetas);
+    }
+
+    // Si no hay valor en el campo, se asigna el VALOR DEFINIDO null, en lugar de estar indefined
+    const objetoGastoFiltrado = {fechaDesde: fechaInicial || null, fechaHasta: fechaFinal || null, valorMinimo: valorMinimo || null,
+                                valorMaximo: valorMaximo || null, descripcionContiene: descripcion || null, etiquetasTiene: arrayEtiquetas.length > 0 ? arrayEtiquetas : null};
+
+    const resultadoFiltrado = gestionPresupuesto.filtrarGastos(objetoGastoFiltrado);
+
+    const listadoGastosCompleto = document.getElementById("listado-gastos-completo");
+    listadoGastosCompleto.innerHTML = "";
+
+    resultadoFiltrado.forEach(gasto => {
+        mostrarGastoWeb("listado-gastos-completo", gasto);
+    });
+}
+
 //* INICIALIZADORES DE EVENTO
 document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
 document.getElementById("anyadirgasto").addEventListener("click", nuevoGastoWeb);
 document.getElementById("anyadirgasto-formulario").addEventListener("click", nuevoGastoWebFormulario);
+document.getElementById("formulario-filtrado").addEventListener("submit", filtrarGastosWeb);
+
 
 
 //* EXPORTACIÓN DE FUNCIONES
