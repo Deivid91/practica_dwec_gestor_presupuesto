@@ -344,11 +344,31 @@ function filtrarGastosWeb(evento) {
     });
 }
 
+function guardarGastosWeb() {
+    let gastosAJSON = JSON.stringify(gestionPresupuesto.listarGastos());
+
+    localStorage.setItem("GestorGastosDWEC", gastosAJSON);
+}
+
+function cargarGastosWeb() {
+    const obtenerGastosJSON = localStorage.getItem("GestorGastosDWEC");
+
+    // Convertimos la cadena JSON a array de objetos PLANOS (sin acceso a sus métodos) o asignamos array vacío en caso de no existir la clave en el almacenamiento
+    const gastosListadosPlanos = obtenerGastosJSON ? JSON.parse(obtenerGastosJSON) : [];
+
+    gestionPresupuesto.cargarGastos(gastosListadosPlanos);    // En este momento, cargarGastos crea nuevos objetos CrearGasto, y copia en ellos las propiedades
+                                                              // de los objetos planos que le estamos pasando (gastosListadosPlanos)
+
+    repintar();
+}
+
 //* INICIALIZADORES DE EVENTO
 document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
 document.getElementById("anyadirgasto").addEventListener("click", nuevoGastoWeb);
 document.getElementById("anyadirgasto-formulario").addEventListener("click", nuevoGastoWebFormulario);
 document.getElementById("formulario-filtrado").addEventListener("submit", filtrarGastosWeb);
+document.getElementById("guardar-gastos").addEventListener("click", guardarGastosWeb);
+document.getElementById("cargar-gastos").addEventListener("click", cargarGastosWeb);
 
 
 
