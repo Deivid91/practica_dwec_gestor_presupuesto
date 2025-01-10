@@ -45,6 +45,27 @@ BorrarHandle.prototype.handleEvent = function() {
 } 
 */
 
+function BorrarApiHandle(gasto) {
+    this.id = gasto.gastoId;
+}
+BorrarApiHandle.prototype.handleEvent = async function() {
+    let recogerNombreUsuario = document.getElementById("nombre_usuario").value;
+    
+    let url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${recogerNombreUsuario}/${this.id}`;
+
+    try {
+        let response = await fetch(url, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error("Se ha producido un error");
+        }
+        cargarGastosApi();
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 function BorrarEtiquetasHandle(gasto, etiqueta) {
     this.gasto = gasto;
     this.etiqueta = etiqueta;
@@ -78,7 +99,12 @@ EditarHandleFormulario.prototype.handleEvent = function() {
         formulario.descripcion.value = this.gasto.descripcion;
         formulario.valor.value = this.gasto.valor;
         formulario.fecha.value = this.gasto.fecha;
-        formulario.etiquetas.value = this.gasto.etiquetas.join(",");
+        if (Array.isArray(this.gasto.etiquetas)) {
+            formulario.etiquetas.value = this.gasto.etiquetas.join(",");
+        }
+        else {
+            formulario.etiquetas.value = this.gasto.etiquetas.split(",");
+        }
 
         gasto.append(formulario);
     }
@@ -98,6 +124,42 @@ EditarHandleFormulario.prototype.handleEvent = function() {
     
     // Función flecha para que el this se refiera al manejador EditarHandleFormulario, no al formulario HTML
     formulario.addEventListener("submit", (evento) => manejadorEnvioEditarFormulario(evento, this.gasto));
+
+    // Manejador de eventos para botón gasto-enviar-api
+    formulario.querySelector(".gasto-enviar-api").addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        let recogerNombreUsuario = document.getElementById("nombre_usuario").value;
+        let url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${recogerNombreUsuario}/${this.gasto.gastoId}`;
+
+        let formData = new FormData(formulario);
+        let gastoActualizado = {};
+
+        formData.forEach((value, key) => {
+            if (key === "etiquetas") {
+                gastoActualizado[key] = value.split (",").map(et => et.trim());
+            } else {
+                gastoActualizado[key] = value;
+            }
+        });
+
+        try {
+            let response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(gastoActualizado)
+            });
+            if (!response.ok) {
+                throw new Error("Se ha producido un error");
+            }
+
+            cargarGastosApi();
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
 }
 
 
@@ -127,6 +189,9 @@ function mostrarGastoWeb(idElemento, gasto) {
     let gastoEtiquetas = document.createElement("div");
     gastoEtiquetas.classList.add("gasto-etiquetas");
 
+    if (!Array.isArray(gasto.etiquetas) && typeof gasto.etiquetas === "string") {
+        gasto.etiquetas = gasto.etiquetas.split(",").map(et => et.trim());
+    }
     if (Array.isArray(gasto.etiquetas)) { // Verificamos si gasto.etiquetas es array. Si no lo es, 
                                           // JS se saltará el forEach SIN GENERAR ERROR (forEach sólo funciona en arrays)
                                           
@@ -164,6 +229,15 @@ function mostrarGastoWeb(idElemento, gasto) {
 
     let manejadorBorrar = new BorrarHandle(gasto);
     botonBorrar.addEventListener("click", manejadorBorrar);
+    
+    // BOTÓN BORRAR (API)
+    const botonBorrarApi = document.createElement("button");
+    botonBorrarApi.textContent = "Borrar (API)";
+    botonBorrarApi.type = "button";
+    botonBorrarApi.classList.add("gasto-borrar-api");
+
+    let manejadorBorrarApi = new BorrarApiHandle(gasto);
+    botonBorrarApi.addEventListener("click", manejadorBorrarApi);
 
     // BOTÓN EDITAR FORMULARIO
     const botonEditarFormulario = document.createElement("button");
@@ -175,7 +249,7 @@ function mostrarGastoWeb(idElemento, gasto) {
     botonEditarFormulario.addEventListener("click", manejadorEditarFormulario);
 
     // AÑADIENDO elementos
-    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas, botonEditar, botonBorrar, botonEditarFormulario);
+    gast.append(gastoDescripcion, gastoFecha, gastoValor, gastoEtiquetas, botonEditar, botonBorrar, botonBorrarApi, botonEditarFormulario);
 
     document.getElementById(idElemento).append(gast);
 }
@@ -264,6 +338,43 @@ function nuevoGastoWebFormulario() {
 
     // Pasar función como manejadora de evento
     formulario.addEventListener("submit", manejadorEnvioFormulario);
+
+    // Manejador eventos para botón gasto-enviar-api
+    formulario.querySelector(".gasto-enviar-api").addEventListener("click", async function (evento) {
+        evento.preventDefault();
+
+        let recogerNombreUsuario = document.getElementById("nombre_usuario").value;
+        let url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${recogerNombreUsuario}`;
+        
+        let formData = new FormData(formulario);
+        let gasto = {};
+
+        formData.forEach((value, key) => {
+            if (key === "etiquetas") {
+                gasto[key] = value.split (",").map(et => et.trim());
+            } else {
+                gasto[key] = value;
+            }
+        });
+
+        try {
+            let response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(gasto)
+            });
+
+            if (!response.ok) {
+                throw new Error("Se ha producido un error");
+            }
+
+            cargarGastosApi();
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
 }
 
 function manejadorEnvioFormulario(eventoEnvio) {
