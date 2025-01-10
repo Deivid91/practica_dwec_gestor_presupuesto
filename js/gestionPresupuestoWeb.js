@@ -362,6 +362,25 @@ function cargarGastosWeb() {
     repintar();
 }
 
+async function cargarGastosApi() {
+    let recogerNombreUsuario = document.getElementById("nombre_usuario").value;
+    try {
+        let response = await fetch(`https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${recogerNombreUsuario}`);
+        
+        if (response.ok) {
+            let gastosJson = await response.json();
+
+            gestionPresupuesto.cargarGastos(gastosJson);
+    
+            repintar();
+        } else {
+            alert("Error-HTTP: " + response.status);
+        }
+    } catch (error) {
+        console.log("Error", error);
+    }
+}
+
 //* INICIALIZADORES DE EVENTO
 document.getElementById("actualizarpresupuesto").addEventListener("click", actualizarPresupuestoWeb);
 document.getElementById("anyadirgasto").addEventListener("click", nuevoGastoWeb);
@@ -369,6 +388,7 @@ document.getElementById("anyadirgasto-formulario").addEventListener("click", nue
 document.getElementById("formulario-filtrado").addEventListener("submit", filtrarGastosWeb);
 document.getElementById("guardar-gastos").addEventListener("click", guardarGastosWeb);
 document.getElementById("cargar-gastos").addEventListener("click", cargarGastosWeb);
+document.getElementById("cargar-gastos-api").addEventListener("click", cargarGastosApi);
 
 
 
