@@ -358,6 +358,17 @@ function repintar() {
     mostrarListadoGastos.forEach(gast => {
         mostrarGastoWeb("listado-gastos-completo", gast);
     });
+    // Mostrar el total de gastos agrupados por día en div#agrupacion-dia
+    const agruparPorDia = gestionPresupuesto.agruparGastos("dia");
+    mostrarGastosAgrupadosWeb("agrupacion-dia", agruparPorDia, "día"); // OJO a la tilde
+    
+    // Mostrar el total de gastos agrupados por mes en div#agrupacion-mes
+    const agruparPorMes = gestionPresupuesto.agruparGastos("mes");
+    mostrarGastosAgrupadosWeb("agrupacion-mes", agruparPorMes, "mes");
+    
+    // Mostrar el total de gastos agrupados por año en div#agrupacion-anyo
+    const agruparPorAnyo = gestionPresupuesto.agruparGastos("anyo");
+    mostrarGastosAgrupadosWeb("agrupacion-anyo", agruparPorAnyo, "año"); // OJO a aÑo
 }
 
 function actualizarPresupuestoWeb() {
