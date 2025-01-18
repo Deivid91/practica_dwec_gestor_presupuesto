@@ -180,7 +180,12 @@ function mostrarGastoWeb(idElemento, gasto) {
     
     let gastoFecha = document.createElement("div");
     gastoFecha.classList.add("gasto-fecha");
-    gastoFecha.textContent = gasto.fecha;
+    let fechaLegible = new Date(gasto.fecha).toLocaleDateString({
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    });
+    gastoFecha.textContent = fechaLegible;
     
     let gastoValor = document.createElement("div");
     gastoValor.classList.add("gasto-valor");
@@ -474,7 +479,7 @@ function manejadorEnvioFormulario(eventoEnvio) {
     let botonEditarForm = document.querySelector(".gasto-editar-formulario");
     botonEditarForm.disabled = false;
     repintar();
-    formulario.remove()
+    formulario.remove();
 }
 
 function manejadorEnvioEditarFormulario(eventoEnvio, gasto) {
