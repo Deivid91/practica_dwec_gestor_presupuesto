@@ -1018,3 +1018,519 @@ Author: Pedro Prieto <pedpral@gmail.com>
 Date:   Fri Sep 24 12:28:53 2021 +0200
 
     Creo práctica introducción a javascript
+[33mcommit 7ee4542e6d0a7cec4760d9c66a0e9ae1a2bec65d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sat Jan 18 11:57:29 2025 +0100
+
+    Corrección mostrarGastoWeb (fechas)
+
+[33mcommit 99c428c6ba493e5723f5624077d153d82b4ed702[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Fri Jan 17 12:18:32 2025 +0100
+
+    Actualización función repintar
+
+[33mcommit d28ef5241cd96141c748dba72e6b3e3f50a0d870[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Fri Jan 17 11:54:55 2025 +0100
+
+    Añadido código para mostrar gráficas de gastos
+
+[33mcommit c3b498b733079204d2881768191e32b3b7d67e1b[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Fri Jan 17 11:31:49 2025 +0100
+
+    Añadidos scripts para generar gráficas de datos agrupados
+
+[33mcommit e9c4afe171fabebba5fe7b21c970fea36e972731[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Fri Jan 10 21:29:04 2025 +0100
+
+    Finalizada práctica Comunicación Asíncrona
+
+[33mcommit b6824d099e11490d73cb38dee41d63333e051565[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Fri Jan 10 08:57:54 2025 +0100
+
+    Añadida función cargarGastosApi
+
+[33mcommit 30f7cc0cdbee52805e04fd8296824a599c4836a6[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Jan 9 17:19:04 2025 +0100
+
+    Añadido botón para enviar datos a la API de servidor
+
+[33mcommit 8ea7bbf1fe3adb160fe245fbbaf0df5a2ca21caf[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Jan 9 17:14:18 2025 +0100
+
+    Añadido nuevo botón y cuadro de texto al html
+
+[33mcommit 7a55e2d20e0e7adbb9cf23df3f57f87217b5768f[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Dec 19 19:39:41 2024 +0100
+
+    Corregidos pequeños detalles
+
+[33mcommit c67e55f484f9bd62d4f33c80e8c078e168576c8f[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Dec 19 18:46:31 2024 +0100
+
+    Añadidas funciones guardarGastosWeb y cargarGastosWeb. Pasa el test8
+
+[33mcommit 89edfb394d322a7669542871e7833beb53390513[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Dec 19 17:31:49 2024 +0100
+
+    Añadida función cargarGastos
+
+[33mcommit 275094a9bcbdd01916a18757cb30126835d289cf[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Dec 19 16:49:15 2024 +0100
+
+    Añadidos botones Guardar gastos y Cargar gastos en el HTML
+
+[33mcommit bb1c6c85f351e78eaf70acec8f8729febd8e4392[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Dec 19 16:14:07 2024 +0100
+
+    Añadida función filtrarGastosWeb. Pasa el test7
+
+[33mcommit a491b92193174edaec1c55bce5e7c3b795f1a63e[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sun Dec 15 23:17:24 2024 +0100
+
+    Añadida función transformarListadoEtiquetas
+
+[33mcommit ad76fda102c3918fc24f848cd4c4584c15d29433[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sun Dec 15 21:14:58 2024 +0100
+
+    Añadido formulario de filtrado en el html
+
+[33mcommit 779c981946437ea462866d8b2191e87bc607b181[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Mon Nov 18 09:23:54 2024 +0100
+
+    Modificado EditarHandleFormulario (eliminada propiedad nueva (gasto) del objeto formulario)
+
+[33mcommit 81c534ce61cbff48d674b65c2d69965cacd6c971[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sun Nov 17 11:36:32 2024 +0100
+
+    Modificada función EditarHandleFormulario para que al cancelar el formulario se active botón Añadir gasto formulario
+
+[33mcommit e6283903f4bb5b1949e5e9c49371d43dd0db8175[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sat Nov 16 21:17:26 2024 +0100
+
+    Pasan test6 - Formularios y JS
+
+[33mcommit d8afcec527ad630a333157ae18691455fa7d5ddb[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Nov 14 14:34:19 2024 +0100
+
+    Creada función manejadorEnvioFormulario
+
+[33mcommit 47016575fa0e08e4f5fbd0cd2f9e6c4826f371aa[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Nov 14 12:32:46 2024 +0100
+
+    Modificado archivo interaccionHTML.html
+
+[33mcommit e913dec09042f62584fc3dc755a79a512a4b14b9[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Thu Nov 14 12:10:57 2024 +0100
+
+    Creadas nuevas funciones. Pasa el test5
+
+[33mcommit 7eb10911693e2c1feda8118a2f234feb64f21b51[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Wed Nov 13 22:49:26 2024 +0100
+
+    Añadidas funciones repintar, actualizarPresupuestoWeb, y función constructora EditarHandle
+
+[33mcommit 46f8f788e80500c05d931e0bb124dd3dec9e9665[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Wed Nov 13 08:47:04 2024 +0100
+
+    Pasan los test de Interacción con HTML
+
+[33mcommit 695cb9ddf4890436b1f09c8dcdd23cf5a8d90b58[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Mon Nov 11 02:26:17 2024 +0100
+
+    Pasan 7 de 9 test
+
+[33mcommit 7e411c6d97a6d4ca072a20c6b28a348f6228f6c6[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sun Nov 10 22:46:18 2024 +0100
+
+    Finalizado gestionPresupuestoWeb y comenzando a editar generarDatosEstáticos
+
+[33mcommit 51a3fe8e51e25552baf2960df1ca98cc7c8d1ff9[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sat Nov 9 22:37:06 2024 +0100
+
+    Corrección de línea de carga de script en interaccionHTML.html
+
+[33mcommit f5f21e28a3c1c267c71722db1ec9faa957d52819[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Sat Nov 9 22:34:44 2024 +0100
+
+    Creados nuevos ficheros y carga de script en interaccionHTML.html
+
+[33mcommit 0446634a40a53644fd838c3c227cbf486d0023e0[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Fri Nov 8 17:14:32 2024 +0100
+
+    Añadida función agruparGastos
+
+[33mcommit e466efa9f3be9f08edbbd4723e83eacfe60dafb8[m
+Author: David A. Sánchez <davamosan@alu.edu.gva.es>
+Date:   Wed Nov 6 16:54:33 2024 +0100
+
+    Actualizada la función filtrarGasto
+
+[33mcommit bb5ab743f0b30d7e81cb8f61f56074a8a228f164[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Tue Nov 5 19:32:26 2024 +0100
+
+    Añadida función filtrarGastos
+
+[33mcommit 210f2cdae5558f169008108888c7d38d117b2b0e[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Tue Nov 5 16:31:05 2024 +0100
+
+    Añadido método obtenerPeriodoAgrupacion
+
+[33mcommit 27e4971f5addfd5eb1ec4bfacdf3740ba35c680a[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 18:51:17 2024 +0200
+
+    Añadidas funciones vacías filtrarGastos y agruparGastos. Incluidas en el objeto exportde gestionPresupuesto.js
+
+[33mcommit a89be03116a62d74322915ae8b40e3451fa41cad[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 18:13:42 2024 +0200
+
+    Corregidos errores del método mostrarGastoCompleto. Pasa el test2
+
+[33mcommit c11418a1e05317b9b92ef38ff8c469eeddbdedbc[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 17:56:27 2024 +0200
+
+    Añadida función calcularBalance
+
+[33mcommit 5e27bab1b6719f745384c86c03d5dc6bc51d2b86[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 17:50:07 2024 +0200
+
+    Añadidas funciones anyadirGasto, borrarGasto, y calcularTotalGastos
+
+[33mcommit 0addfc3eeffbe38cff18358a601eb907cf1737ee[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 15:50:43 2024 +0200
+
+    Añadido método borrarEtiquetas al objeto gasto
+
+[33mcommit 97a0c4852ee4b896b0205827b80bdf5d0e48a6f1[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 15:21:41 2024 +0200
+
+    Añadido método anyadirEtiquetas al objeto gasto
+
+[33mcommit a4550ae4a5e2edcb1c5adbd4b69e7a76189d9df3[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 14:21:29 2024 +0200
+
+    Añadido método actualizarFecha al objeto gasto
+
+[33mcommit ab927ff54d815490281c5a5b9b17f31d1e3dbbf9[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Thu Oct 24 13:25:36 2024 +0200
+
+    Creando nuevos métodos del objeto gasto
+
+[33mcommit 6dfffb0f780a3bbb9f9fc86342917da1b3b15bd4[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Mon Oct 21 23:27:41 2024 +0200
+
+    Definidas funciones vacías en gestionPresupuesto.js
+
+[33mcommit 6fbd66252141c85f979b2bae2b39087b7917a97b[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Mon Oct 21 23:15:14 2024 +0200
+
+    Añadidas nuevas funciones al objeto export del fichero gestionPresupuesto.js (para poder ejecutar el test2 correctamente)
+
+[33mcommit 9589769ee540d96000df8c650530c1f92c090da6[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Mon Oct 21 02:00:47 2024 +0200
+
+    Añadido repositorio remoto 'profesor', y modificado código gestionPresupuesto.js para que pase el test1
+
+[33mcommit f93f97fb2d0d67164b0830c216bee579ededecd2[m
+Author: David A. Sánchez <davidas91@hotmail.com>
+Date:   Mon Oct 21 00:29:31 2024 +0200
+
+    Creado esqueleto HTML con referencia a archivo js que muestra por ALERT mi nombre. Creado archivo js que muestra en CONSOLA mi nombre
+
+[33mcommit 11c4a1d17e52b284ed35f3c6763fc7b7c54dcea0[m[33m ([m[1;31mprofesor/master[m[33m)[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Oct 16 21:03:32 2024 +0200
+
+    Correcta configuración de plantillas de lanzamiento de test para VS Code
+
+[33mcommit c60d86d32084aa9613e5a5c91030609bf4381535[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Fri Sep 27 12:01:00 2024 +0200
+
+    Actualizo dependencias. Añado encabezados en HTML
+
+[33mcommit 1b8216e10534ebdd6fb8709ebb7e00f961831958[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Thu Jan 20 10:42:49 2022 +0100
+
+    Corrijo enunciado
+
+[33mcommit f6927480a8eb6c67ab85d217e856ab19d320aeb1[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Dec 22 19:07:13 2021 +0100
+
+    Aclaración sobre WebPack
+
+[33mcommit 37cb535a8424a8aa5cf1095f67ab9123415fcddd[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Dec 22 19:04:10 2021 +0100
+
+    Añado videotutorial de WebPack
+
+[33mcommit 8ca1b279941b0bbe4ef5159aefe89a0cbd74b612[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Dec 22 14:20:56 2021 +0100
+
+    Errata
+
+[33mcommit e18db55a8a0f25ce66ac1b89d898fcf41a6c597b[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Dec 22 14:12:49 2021 +0100
+
+    Corrección práctica almacenamiento
+
+[33mcommit 6a5005762b4feeb51780909f0bd9a26598af0c9a[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Dec 21 13:24:52 2021 +0100
+
+    Estilo
+
+[33mcommit 86d6c7987d9b6abc3f3b79e71d06caf9e9176e12[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Dec 21 13:22:05 2021 +0100
+
+    Aclaración
+
+[33mcommit b27a1a9398912932fcc64aea5faca2921b846a58[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Dec 21 13:20:22 2021 +0100
+
+    Práctica librerías externas
+
+[33mcommit 36e3fd4447a8c00b51e1f72ca68cfcd599370700[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 20 15:08:03 2021 +0100
+
+    Enlaces a vídeos en enunciado async
+
+[33mcommit 955d96209e6f14e600c8bd1fef27554be81194ef[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 20 09:32:20 2021 +0100
+
+    Aclaración enunciado async
+
+[33mcommit 229860def62bea246a53c26e46b1bdf708891978[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 13 19:21:29 2021 +0100
+
+    Actualizo README
+
+[33mcommit b789e7989433aa1098cbad5fae1bbada99f906ba[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 13 19:20:01 2021 +0100
+
+    Actualizo enunciado
+
+[33mcommit e691f531a971a71fc9ac86b9a570b0361546e1fe[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 13 19:11:32 2021 +0100
+
+    Quito comentarios test 6 (olvido)
+
+[33mcommit 042439a6f73972576c6bfcd095302d5f1b34b93f[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 13 19:07:54 2021 +0100
+
+    Link API
+
+[33mcommit 7013e399d8bf2fabfee21946bdb6adcd07cc09e4[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Dec 13 19:02:52 2021 +0100
+
+    Enunciado async
+
+[33mcommit e814685f92e0db52807d205289adef5ddc952d99[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Nov 24 09:40:53 2021 +0100
+
+    Nuevo requisito en práctica fundamentos III
+
+[33mcommit 18e9372e252a9c57a71bbb79b6a5eee2d2c6c4bb[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 22 02:07:16 2021 +0100
+
+    Aclaración
+
+[33mcommit b72368ebf923032848245038dab1b251b557799a[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 22 02:06:55 2021 +0100
+
+    Práctica almacenamiento localstorage
+
+[33mcommit 5e5b905b3912c92e5eaf40afe1c166dec1af6b09[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 16 09:53:27 2021 +0100
+
+    Errata
+
+[33mcommit 848834dbee5d0e25efb930dc6c3ebdc4c908884a[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 15 19:07:44 2021 +0100
+
+    Añado información extra enunciado Regexp
+
+[33mcommit 6c1f805f88837374df6c2fa98912d0f8d4fd88f7[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 15 19:04:33 2021 +0100
+
+    Errata
+
+[33mcommit 0e72622c90369e7b107ebcee9875320eb6bfe638[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 15 19:04:13 2021 +0100
+
+    Estilos formulario filtrado
+
+[33mcommit 9f2b0b6680843f85855c9d4827d42785105225c8[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 15 19:03:45 2021 +0100
+
+    Práctica expresiones regulares
+
+[33mcommit 52389863736f0bbff951cbc13b7d1c8b8a4c8712[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 15 11:46:06 2021 +0100
+
+    Añado hoja de estilos
+
+[33mcommit 8561efa4b014cc708c7470f654d1f426cb8b609d[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Nov 10 16:40:16 2021 +0100
+
+    Test 1 - Comprobación función constructora
+
+[33mcommit b50396920c84d3dcc05ee5a05372a1d2b0a7f505[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 9 12:11:39 2021 +0100
+
+    Aclaración 3 y formato
+
+[33mcommit fbc3cf30df0b26234985a889690db35605ac05c7[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 9 12:06:21 2021 +0100
+
+    Aclaración 2
+
+[33mcommit 92467ec051f68e06184a3cf85d34e05cbb8860be[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 9 12:03:43 2021 +0100
+
+    Aclaración
+
+[33mcommit 36d2e071d112cc3553165bf596b8e2b4c5420439[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 9 11:54:15 2021 +0100
+
+    Práctica Formularios y JavaScript
+
+[33mcommit 02bde58972ed0a352d791bc831596225b8a8372f[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 8 22:47:55 2021 +0100
+
+    Aclaración issues en enunciados
+
+[33mcommit ea2f0fcc1535b68ae223baf0a6b9bbe293007a14[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Mon Nov 8 22:36:15 2021 +0100
+
+    Errata
+
+[33mcommit cdc3720d5e815d2ce20114f97a0ea6656d7f1cdc[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 2 15:46:31 2021 +0100
+
+    Actualizo README
+
+[33mcommit efadc7e93202813d5c7c666c2b6402bc01a5b29d[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Nov 2 15:45:29 2021 +0100
+
+    Práctica Eventos JavaScript
+
+[33mcommit b3a559375c4d102e57cc102af86510fb3760570d[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Fri Oct 29 11:00:57 2021 +0200
+
+    Corrijo errores en test 4
+
+[33mcommit f67a177c2a0d1158ddb1f595dc53edc4191394ce[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Oct 26 13:33:08 2021 +0200
+
+    Quito importación que no se utiliza
+
+[33mcommit e769110b7b366cf373cc081944df4c9c934bf02f[m
+Merge: e4fc408 94b8ed9
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Oct 26 13:20:38 2021 +0200
+
+    Merge branch 'master' of https://github.com/pedroprieto/practica_dwec_gestor_presupuesto
+
+[33mcommit e4fc408a955e93e671293423e41e12357ec399c2[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Tue Oct 26 13:20:18 2021 +0200
+
+    Práctica Interacción HTML
+
+[33mcommit 94b8ed97f0fc02654148ffb09ec8166041a17b5b[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Fri Oct 22 23:42:35 2021 +0200
+
+    Corrijo error en enunciado
+
+[33mcommit d7f75d89a800ed3589fbe8db4f7a8c6491b60fd5[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Oct 20 13:24:42 2021 +0200
+
+    Añado información de depuración en VS Code
+
+[33mcommit 84e2716a79d546f169bb5606568c18570bfa3ef4[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Oct 20 13:22:50 2021 +0200
+
+    Corrijo enlace
+
+[33mcommit 9c678fc30de29df9397eec99bca412545dc5fec3[m
+Author: Pedro Prieto <pedpral@gmail.com>
+Date:   Wed Oct 20 13:21:14 2021 +0200
+
+    Añado información sobre depuración en VS Code

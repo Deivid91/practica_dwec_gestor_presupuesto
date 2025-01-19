@@ -282,11 +282,11 @@ function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
     
         let agrupacionDatoClave = document.createElement("span");
         agrupacionDatoClave.classList.add("agrupacion-dato-clave");
-        agrupacionDatoClave.textContent = clave;
+        agrupacionDatoClave.textContent = `Fecha: ${clave} | `;
 
         let agrupacionDatoValor = document.createElement("span");
         agrupacionDatoValor.classList.add("agrupacion-dato-valor");
-        agrupacionDatoValor.textContent = valor;
+        agrupacionDatoValor.textContent = ` Valor: ${parseFloat(valor).toFixed(2)}€`;
 
         agrupacion.append(agrupacionDato);
         agrupacionDato.append(agrupacionDatoClave, agrupacionDatoValor);
@@ -468,7 +468,7 @@ function manejadorEnvioFormulario(eventoEnvio) {
 
     let descripcion = formulario.descripcion.value;
     let valor = parseFloat(formulario.valor.value);
-    let fecha = Date.parse(formulario.fecha.value);
+    let fecha = new Date(formulario.fecha.value);
     let etiquetas = formulario.etiquetas.value.split(", ");
 
     let gasto = new gestionPresupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
